@@ -76,7 +76,7 @@ router.get('/consultarTransacao', async (req, res) => {
 });
 
 // Minhas transções
-router.get('/consultarTransacao', async (req, res) => {
+router.get('/minhastrasacoes', async (req, res) => {
     const idusuario = req.body.idUser;
 
     // Parametro consulta http://localhost:3000/noticias/consulta?topic=Desenvolvimento
