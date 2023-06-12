@@ -47,23 +47,23 @@ router.get('/consultaruser', async (req, res) => {
     }
 })
 
-// Pegar por topico
-// router.get('/consultarusuario', async (req, res) => {
-//     const login = req.query.user;
-//     const senhausuario = req.query.usupassowrd;
-//     // Parametro consulta http://localhost:3000/noticias/consulta?topic=Desenvolvimento
-//     try {
-//         const usuarios = await User.find({ login: login, password: senhausuario });
+// Autenticar user
+router.get('/consultaruserAPI', async (req, res) => {
+    const login = req.body.login;
+    const senhausuario = req.body.pass;
+    // Parametro consulta http://localhost:3000/noticias/consulta?topic=Desenvolvimento
+    try {
+        const usuarios = await User.find({ login: login, password: senhausuario });
 
-//         return res.status(200).json(usuarios);
-//     } catch (error) {
-//         res.status(500).json({ error });
-//     }
-// });
+        return res.status(200).json(usuarios);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+});
 
 
 // Pegar o usuario pela ID
-router.get('/:id', async (req, res)=>{
+router.get('/consultaruser/:id', async (req, res)=>{
     const id = req.params.id
 
     try {
