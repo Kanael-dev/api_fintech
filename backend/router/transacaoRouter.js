@@ -77,7 +77,7 @@ router.get('/consultarTransacao', async (req, res) => {
 
 // Minhas transções
 router.get('/minhastrasacoes', async (req, res) => {
-    const idusuario = req.params.idUser;
+    const idusuario = req.query.idUser;
 
     // Parametro consulta http://localhost:3000/noticias/consulta?topic=Desenvolvimento
     try {
