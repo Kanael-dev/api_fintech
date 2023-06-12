@@ -1,4 +1,4 @@
-require("dotenv").config();
+const dot = require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -8,10 +8,10 @@ mongoose.set("strictQuery", false);
 
 app.use(cors());
 
-// configuração
 
-const DB_USER = "userAPI";
-const DB_PASSWORD = "userapiteste123.";
+// Variveis de ambiente
+const userNameMongo = process.env.USER_NAME;
+const userPasswordMongo = process.env.USER_PASSWORD;
 
 //Configuração para ler o JSON //
 app.use(
@@ -33,7 +33,7 @@ app.use("/fotos", uploadFoto);
 
 mongoose
 .connect(
-  `mongodb+srv://kanaeldev:tsxNPEiNMsnDkz7c@kanael0.yuazcu9.mongodb.net/`
+  `mongodb+srv://${userNameMongo}:${userPasswordMongo}@kanael0.yuazcu9.mongodb.net/`
 )
 .then(() => {
   console.log("Conectado com sucesso");
