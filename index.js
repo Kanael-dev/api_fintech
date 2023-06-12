@@ -25,9 +25,11 @@ app.use(express.json());
 //Rotas api //
 const userRouter = require("./backend/router/userRouter");
 const uploadFoto = require("./backend/router/uploadRouter");
+const transacaoRouter = require("./backend/router/transacaoRouter");
 
 app.use("/usuarios", userRouter);
 app.use("/fotos", uploadFoto);
+app.use("/transacao", transacaoRouter);
 
 //Configuração para ler o JSON //
 
