@@ -4,7 +4,7 @@ const Transacao = require('../models/Transacao.js')
 //Rotas da API - Criacao de dados
 router.post('/', async (req, res) => {
 
-    const {name, valor, tipo, data} = req.body
+    const {idUser, name, valor, tipo, data} = req.body
 
     if(!name){
         res.status(422).json({error: 'O nome é obrigatorio'})
@@ -12,6 +12,7 @@ router.post('/', async (req, res) => {
     }
 
     const dataTransferencia = {
+        idUser,
         name,
         valor,
         tipo,
@@ -66,7 +67,21 @@ router.get('/consultarTransacao', async (req, res) => {
 
     // Parametro consulta http://localhost:3000/noticias/consulta?topic=Desenvolvimento
     try {
-        const transacao = await User.find({ tipo: tipo_consulta});
+        const transacao = await Transacao.find({ tipo: tipo_consulta});
+
+        return res.status(200).json(transacao);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+});
+
+// Minhas transções
+router.get('/consultarTransacao', async (req, res) => {
+    const tipo_consulta = req.query.tipo;
+
+    // Parametro consulta http://localhost:3000/noticias/consulta?topic=Desenvolvimento
+    try {
+        const transacao = await Transacao.find({ tipo: tipo_consulta});
 
         return res.status(200).json(transacao);
     } catch (error) {
