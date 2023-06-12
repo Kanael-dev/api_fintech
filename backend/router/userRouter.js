@@ -49,8 +49,8 @@ router.get('/consultaruser', async (req, res) => {
 
 // Autenticar user
 router.get('/consultaruserAPI', async (req, res) => {
-    const login = req.body.login;
-    const senhausuario = req.body.pass;
+    const login = req.query.login;
+    const senhausuario = req.query.password;
     // Parametro consulta http://localhost:3000/noticias/consulta?topic=Desenvolvimento
     try {
         const usuarios = await User.find({ login: login, password: senhausuario });
