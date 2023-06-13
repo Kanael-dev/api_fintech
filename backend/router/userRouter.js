@@ -1,9 +1,7 @@
-const verificarToken = require('../middlewares/authMiddleware.js');
 const router = require("express").Router();
-// const Person = require('.../models/Person')
 const User = require("../models/User.js");
-
-
+const verificarToken = require('../middlewares/authMiddleware.js');
+const jwt = require('jsonwebtoken');
 //Rotas da API - Criacao de dados
 
 router.post("/", verificarToken, async (req, res) => {
