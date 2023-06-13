@@ -45,7 +45,7 @@ router.get("/consultaruser", verificarToken, async (req, res) => {
 });
 
 // Autenticar usuário
-router.get('/consultaruserAPI', verificarToken, async (req, res) => {
+router.get('/consultaruserAPI', async (req, res) => {
     const login = req.query.login;
     const senhausuario = req.query.password;
     const chaveSecreta = process.env.SECRET_KEY_JWT;
