@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
 mongoose.set("strictQuery", false);
 
@@ -21,16 +23,23 @@ app.use(
 );
 
 app.use(express.json());
+app.use(cookieParser());
+// Validador
+
+const router = express.Router();
+
 
 //Rotas api //
 const userRouter = require("./backend/router/userRouter");
 const uploadFoto = require("./backend/router/uploadRouter");
 const transacaoRouter = require("./backend/router/transacaoRouter");
+const auth = require("./backend/router/recurso-protegido");
+
 
 app.use("/usuarios", userRouter);
 app.use("/fotos", uploadFoto);
 app.use("/transacao", transacaoRouter);
-
+app.use("/auth", auth)
 //Configuração para ler o JSON //
 
 mongoose

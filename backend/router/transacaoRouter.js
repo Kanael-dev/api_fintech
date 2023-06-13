@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Transacao = require('../models/Transacao.js')
+const verificarToken = require('../middlewares/authMiddleware.js');
 
 //Rotas da API - Criacao de dados
 router.post('/', async (req, res) => {
@@ -35,7 +36,7 @@ router.post('/', async (req, res) => {
 //Rotas da API - Criar dados
 
 // Consultar
-router.get('/consultarTransacao', async (req, res) => {
+router.get('/consultarTransacao', verificarToken, async (req, res) => {
     try {
         const transacao = await Transacao.find()
 
