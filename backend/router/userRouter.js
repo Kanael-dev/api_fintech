@@ -1,13 +1,12 @@
+const verificarToken = require('../middlewares/authMiddleware.js');
 const router = require("express").Router();
 // const Person = require('.../models/Person')
 const User = require("../models/User.js");
-const jwt = require("jsonwebtoken");
-const express = require('express');
 
 
 //Rotas da API - Criacao de dados
 
-router.post("/", async (req, res) => {
+router.post("/", verificarToken, async (req, res) => {
   const { name, login, password, URI } = req.body;
 
   if (!name) {
@@ -35,7 +34,7 @@ router.post("/", async (req, res) => {
 //Rotas da API - Criar dados
 
 // Consultar
-router.get("/consultaruser", async (req, res) => {
+router.get("/consultaruser", verificarToken, async (req, res) => {
   try {
     const usuarios = await User.find();
 
@@ -46,7 +45,7 @@ router.get("/consultaruser", async (req, res) => {
 });
 
 // Autenticar usuário
-router.get('/consultaruserAPI', async (req, res) => {
+router.get('/consultaruserAPI', verificarToken, async (req, res) => {
     const login = req.query.login;
     const senhausuario = req.query.password;
     const chaveSecreta = process.env.SECRET_KEY_JWT;
@@ -76,7 +75,7 @@ router.get('/consultaruserAPI', async (req, res) => {
 
 
 // Pegar o usuario pela ID
-router.get("/consultaruser/:id", async (req, res) => {
+router.get("/consultaruser/:id", verificarToken, async (req, res) => {
   const id = req.params.id;
 
   try {

@@ -3,7 +3,7 @@ const Transacao = require('../models/Transacao.js')
 const verificarToken = require('../middlewares/authMiddleware.js');
 
 //Rotas da API - Criacao de dados
-router.post('/', async (req, res) => {
+router.post('/', verificarToken, async (req, res) => {
 
     const {idUser, name, valor, tipo, data} = req.body
 
@@ -49,7 +49,7 @@ router.get('/consultarTransacao', verificarToken, async (req, res) => {
 
 
 // Pegar o usuario pela ID
-router.get('/consultarTransacao/:id', async (req, res)=>{
+router.get('/consultarTransacao/:id', verificarToken, async (req, res)=>{
     const id = req.params.id
 
     try {
@@ -63,7 +63,7 @@ router.get('/consultarTransacao/:id', async (req, res)=>{
 })
 
 // Pegar por topico
-router.get('/consultarTransacao', async (req, res) => {
+router.get('/consultarTransacao', verificarToken, async (req, res) => {
     const tipo_consulta = req.query.tipo;
 
     // Parametro consulta http://localhost:3000/noticias/consulta?topic=Desenvolvimento
@@ -77,7 +77,7 @@ router.get('/consultarTransacao', async (req, res) => {
 });
 
 // Minhas transções
-router.get('/minhastrasacoes', async (req, res) => {
+router.get('/minhastrasacoes', verificarToken, async (req, res) => {
     const idusuario = req.query.idUser;
 
     // Parametro consulta http://localhost:3000/noticias/consulta?topic=Desenvolvimento
