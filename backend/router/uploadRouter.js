@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const cloudinary = require("cloudinary").v2;
+const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
   cloud_name: "dqt1e2g5d",
@@ -8,13 +8,16 @@ cloudinary.config({
 });
 
 router.post("/uploadfoto", async (req, res) => {
+  const options = {
+    use_filename: true,
+    unique_filename: false,
+    overwrite: true,
+  };
+
   try {
-    const base64Data = req.body.base64Data; // Dados em base64 da imagem
+    const base64Data = req.body.file; // Dados em base64 da imagem
 
-    const response = await cloudinary.uploader.upload(base64Data, {
-      public_id: "olympic_flag",
-    });
-
+    const response = await cloudinary.uploader.upload(base64Data, options);
     console.log("Imagem enviada com sucesso:", response.secure_url);
 
     res.status(200).json({ success: true, url: response.secure_url });

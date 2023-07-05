@@ -36,7 +36,7 @@ router.post('/', verificarToken, async (req, res) => {
 //Rotas da API - Criar dados
 
 // Consultar
-router.get('/consultarTransacao', verificarToken, async (req, res) => {
+router.get('/consultarTransacao', async (req, res) => {
     try {
         const transacao = await Transacao.find()
 
